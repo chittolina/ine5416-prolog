@@ -4,7 +4,7 @@
 discfase(D,F) :- disciplina(F, D, _).
 
 % Questão 2
-prereqfase(Dpr,F) :- prerequisito(Dpr,D) , discfase(D,F).
+prereqfase(Dpr,F) :- prerequisito(Dpr,_) , discfase(Dpr,F).
 
 % Questão 3
 nomeprereqnome(Npr,N) :- disciplina(_,Dpr,Npr) , prerequisito(Dpr,D) , disciplina(_,D,N).
