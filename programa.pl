@@ -14,3 +14,6 @@ nomeprereqfase(Npr,Dpr,Fpr) :-  prerequisito(Dpr,_) , disciplina(Fpr,Dpr,Npr).
 
 % Questão 5
 prereqdiscfase(Dpr,D,F) :- prerequisito(Dpr,D), discfase(D,F).
+
+% Questão 6
+prereqdiscfaseprereq(Dpr,D,Fpr) :- discfase(Dpr,Fpr) , prereqdiscfase(Dpr,D,_).
