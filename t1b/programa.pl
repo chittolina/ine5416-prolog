@@ -1,12 +1,17 @@
 :- consult('cco.pl').
 
 % Questão 1
-precomum(Dpr, D1, D2) :- true.
+precomum(Dpr, D1, D2) :-
+  prerequisito(Dpr,D1) ,
+  prerequisito(Dpr,D2) ,
+  disciplina(_,D1,_) ,
+  disciplina(_,D2,_) ,
+  D1 \= D2 .
 
 % Questão 2
 precomumsaopre(D1, D2, F) :- true.
 
-% Questão 3
+%% Questão 3
 prepre(Dpr, D) :- true.
 
 % Questão 4
