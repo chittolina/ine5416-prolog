@@ -31,7 +31,10 @@ predistante(Dpr, D) :-
   not((F is Fpr+1)) .
 
 % Questão 5
-prefasepar(Dpr, D) :- true.
+prefasepar(Dpr, D) :-
+  prerequisito(Dpr,D) ,
+  disciplina(F,Dpr,_) ,
+  0 is mod(F,2) .
 
 % Questão 6 - RESOLVIDA
 precadeia(X, []) :- \+prerequisito(X, _).
