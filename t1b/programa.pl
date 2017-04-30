@@ -17,7 +17,11 @@ precomumsaopre(D1, D2, F) :-
   prerequisito(D2,_) .
 
 %% Questão 3
-prepre(Dpr, D) :- true.
+prepre(Dpr, D) :-
+  disciplina(_,D,_) ,
+  prerequisito(Dpr1,D) ,
+  prerequisito(Dpr,Dpr1) .
+
 
 % Questão 4
 predistante(Dpr, D) :- true.
