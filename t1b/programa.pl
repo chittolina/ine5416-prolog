@@ -24,7 +24,11 @@ prepre(Dpr, D) :-
 
 
 % Questão 4
-predistante(Dpr, D) :- true.
+predistante(Dpr, D) :-
+  disciplina(F,D,_) ,
+  prerequisito(Dpr,D) ,
+  disciplina(Fpr,Dpr,_) ,
+  not((F is Fpr+1)) .
 
 % Questão 5
 prefasepar(Dpr, D) :- true.
