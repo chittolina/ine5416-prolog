@@ -9,7 +9,12 @@ precomum(Dpr, D1, D2) :-
   D1 \= D2 .
 
 % Questão 2
-precomumsaopre(D1, D2, F) :- true.
+precomumsaopre(D1, D2, F) :-
+  disciplina(F,D1,_) ,
+  disciplina(F,D2,_) ,
+  precomum(_,D1,D2) ,
+  prerequisito(D1,_) ,
+  prerequisito(D2,_) .
 
 %% Questão 3
 prepre(Dpr, D) :- true.
