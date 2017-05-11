@@ -1,10 +1,12 @@
 :- consult('cco.pl').
 
-% Predicados auxiliares.
-
 % Retorna comprimento da lista
 len([], 0).
 len([_|T], N) :- len(T, N1), N is N1 + 1.
+
+% Retorna cadeias de pré-requisitos
+precadeia(X, []) :- \+prerequisito(X, _).
+precadeia(X, [Y|Lc]) :- prerequisito(X, Y), precadeia(Y, Lc).
 
 % Questão 1
 nfase(F, N) :-
@@ -29,10 +31,44 @@ nsaopre(N) :-
 
 % Questão 5
 npre(D,N) :-
-  findall(_, prerequisito(_,D), L) ,
-  len(L,N) .
+  findall(Dr, prerequisito(Dr,D), L) ,
+  len(L, N) .
+
+npreaux(D,N) :-
+  bagof(Dr, prerequisito(Dr,D), L) ,
+  len(L, N) .
+
 
 % Questão 6
-maispre(N) :-
-  findall(_, npre(_,N), L) ,
+maispre(D) :-
+  findall(M, npreaux(D,M), Lr) ,
+  max_list(Lr, N) ,
+  npreaux(D, N) .
+
+% Questão 7
+npos(D,N) :-
+  findall(Dpr,prerequisito(D,Dpr), L),
   len(L,N) .
+
+nposaux(D,N) :-
+  bagof(Dpr,prerequisito(D,Dpr), L),
+  len(L,N) .
+
+% Questão 8
+maispos(D) :-
+  findall(M, nposaux(D,M), L) ,
+  max_list(L, N) ,
+  nposaux(D, N) .
+
+listandcount([H|T],N) :-
+  precadeia(H,T) ,
+  len([H|T], N) .
+
+findlongestlist(L) :-
+  findall(N, listandcount(_,N), Lr) ,
+  max_list(Lr, M) ,
+  listandcount(L,M) .
+
+% Questão 9
+maiorcadeia(Lr) :-
+  findall(L,findlongestlist(L),Lr) .
