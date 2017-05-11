@@ -8,6 +8,17 @@ len([_|T], N) :- len(T, N1), N is N1 + 1.
 precadeia(X, []) :- \+prerequisito(X, _).
 precadeia(X, [Y|Lc]) :- prerequisito(X, Y), precadeia(Y, Lc).
 
+% Retorna cadeia de pré-requisitos e tamanho da cadeia
+listandcount([H|T],N) :-
+  precadeia(H,T) ,
+  len([H|T], N) .
+
+% Retorna a maior cadeia
+findlongestlist(L) :-
+  findall(N, listandcount(_,N), Lr) ,
+  max_list(Lr, M) ,
+  listandcount(L,M) .
+
 % Questão 1
 nfase(F, N) :-
   findall(_, disciplina(F,_,_), L) ,
@@ -59,15 +70,6 @@ maispos(D) :-
   findall(M, nposaux(D,M), L) ,
   max_list(L, N) ,
   nposaux(D, N) .
-
-listandcount([H|T],N) :-
-  precadeia(H,T) ,
-  len([H|T], N) .
-
-findlongestlist(L) :-
-  findall(N, listandcount(_,N), Lr) ,
-  max_list(Lr, M) ,
-  listandcount(L,M) .
 
 % Questão 9
 maiorcadeia(Lr) :-
